@@ -72,4 +72,4 @@ jobs:
             cd /mnt/c/Users/user/Documents/Ansible_workflow
             git pull --ff-only origin master
             ansible-playbook --syntax-check deploy.yml
-            ansible-playbook deploy.ymlq
+            ansible-playbook deploy.yml
