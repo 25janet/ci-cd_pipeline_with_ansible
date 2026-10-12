@@ -1,0 +1,56 @@
+---
+- name: Ansible playbook practice
+  hosts: localhost
+  connection: localhost
+
+  vars:
+    app_name: "myapp"
+    environment: "development"
+    packages:
+      - curl
+      - wget
+      - git
+
+  tasks: 
+    - name: Display the application name
+      ansible.builtin.debug:
+        msg: "Application: {{ app_name }}"
+
+    - name: Check the current user
+      ansible.builtin.command: whoami
+      register: user_result
+      changed_when: false
+
+    - name: Display the current user
+      ansible.builtin.debug:
+        msg: "Current user: {{ user_result.stdout }}"
+    
+    - name: Display each packages
+      ansible.builtin.debug:
+        msg: "Packages to consider {{ item }}"
+      loop: "{{packages}}"
+    
+    - name: Check the environment
+      ansible.builtin.debug:
+        msg: "Deploy to production"
+      when: environment == "development"
+    
+    - name: Demonstrate error handling
+      block:
+        - name: Run a sucessful tasks
+          ansible.builtin.debug:
+            msg: "Main block is running"
+        
+        - name: Simulate a failure
+          ansible.builtin.command: /bin/false
+      
+      rescue:
+        - name: Report the failure
+          ansible.builtin.debug:
+            msg: "The bug was caught by the rescue block"
+      
+      always: 
+        - name: Block Completion
+          ansible.builtin.debug:
+            msg: "Block processing has finished"
+
