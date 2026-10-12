@@ -46,8 +46,8 @@ jobs:
       - name: Build Docker image
         run: |
           docker build \
-            -t ${{ env.registry}}/${{ env.image_name }}:latest . \
-            -t ${{ env.registry }}/${{ env.image_name }}:{{ github.sha }}
+            -t ${{ env.registry}}/${{ env.image_name }}:latest  \
+            -t ${{ env.registry }}/${{ env.image_name }}:{{ github.sha }} .
 
       - name: Push the image to DockerHub
         run: |
