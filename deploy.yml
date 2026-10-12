@@ -10,5 +10,5 @@
         name: devops-task-tracker
         image: janetjohn15/devops-task-tracker:latest
         state: started
-        pull: false
+        pull: true
         restart_policy: no
