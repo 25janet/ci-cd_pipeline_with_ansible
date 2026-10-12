@@ -1,0 +1,14 @@
+---
+- name: Deploy DevOps Task Tracker
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  tasks:
+    - name: Ensure DevOps Task Tracker container is running
+      community.docker.docker_container:
+        name: devops-task-tracker
+        image: janetjohn15/devops-task-tracker:latest
+        state: started
+        pull: false
+        restart_policy: no
