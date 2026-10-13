@@ -4,11 +4,15 @@
   connection: local
   gather_facts: false
 
+  vars:
+    image_tag: "{{ lookup('env', 'IMAGE_TAG') | default('latest', true) }}"
+
   tasks:
     - name: Ensure DevOps Task Tracker container is running
       community.docker.docker_container:
         name: devops-task-tracker
-        image: janetjohn15/devops-task-tracker:latest
+        image: "janetjohn15/devops-task-tracker:{{ image_tag }}"
         state: started
         pull: true
+        recreate: true
         restart_policy: no
