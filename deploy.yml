@@ -14,5 +14,4 @@
         image: "janetjohn15/devops-task-tracker:{{ image_tag }}"
         state: started
         pull: true
-        recreate: true
         restart_policy: no
