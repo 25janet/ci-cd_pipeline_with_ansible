@@ -29,8 +29,7 @@ pipeline {
 
                 echo 'Install dependencies'
                 sh './venv/bin/python -m pip install --upgrade pip'
-                sh './venv/bin/python -m pip install -r requirements.txt'
-
+                
                 echo 'Run tests'
                 sh './venv/bin/python -m pytest'
             }
