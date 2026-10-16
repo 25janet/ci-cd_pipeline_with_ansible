@@ -1,3 +1,4 @@
+
 ---
 - name: Deploy DevOps Task Tracker
   hosts: localhost
@@ -14,22 +15,22 @@
         image: "janetjohn15/devops-task-tracker:{{ image_tag }}"
         state: started
         pull: true
-        restart_policy: no
+        restart_policy: "no"
 
-    - name: Inspect Devops Task Tracker container
+    - name: Inspect DevOps Task Tracker container
       community.docker.docker_container_info:
-          name: devops-task-tracker
+        name: devops-task-tracker
       register: container_info
 
-    - name: Verify Container exited Successfully
+    - name: Verify container exited successfully
       ansible.builtin.assert:
         that:
-            - container_info.container.State.Status == "exited"
-            - container_info.container.State.ExitCode == 0
-        success_msg: "Container exited Successfully"
-        fail_msg: "Container did not exit Successfully"
+          - container_info.container.State.Status == "exited"
+          - container_info.container.State.ExitCode == 0
+        success_msg: "Container exited successfully"
+        fail_msg: "Container did not exit successfully"
 
-    - name: Read Devops Task Tracker container logs
+    - name: Read DevOps Task Tracker container logs
       ansible.builtin.command:
         argv:
           - docker
@@ -38,11 +39,10 @@
       register: container_logs
       changed_when: false
       check_mode: false
-      register: container_exit
 
     - name: Verify expected application output
       ansible.builtin.assert:
         that:
           - "'Devops Task Tracker is running' in container_logs.stdout"
-        success_msg: "Application output verified successfully."
-        fail_msg: "Expected application output was not found in container logs."
+        success_msg: "Application output verified successfully"
+        fail_msg: "Expected application output was not found in container logs"
