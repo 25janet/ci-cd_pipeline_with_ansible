@@ -32,7 +32,7 @@ pipeline {
                 
                 echo 'Install pytest'
                 sh './venv/bin/python -m pip install pytest'
-                
+
                 echo 'Run tests'
                 sh './venv/bin/python -m pytest'
             }
@@ -59,7 +59,7 @@ pipeline {
 
         stage('Build and Push Docker Image') {
             when {
-                branch 'master'
+                expression { env.BRANCH_NAME == 'master' || env.GIT_BRANCH == 'origin/master' }
             }
 
             steps {
