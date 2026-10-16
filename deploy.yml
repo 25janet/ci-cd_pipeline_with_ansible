@@ -37,6 +37,8 @@
           - devops-task-tracker
       register: container_logs
       changed_when: false
+      check_mode: false
+      register: container_exit
 
     - name: Verify expected application output
       ansible.builtin.assert:
