@@ -30,6 +30,9 @@ pipeline {
                 echo 'Install dependencies'
                 sh './venv/bin/python -m pip install --upgrade pip'
                 
+                echo 'Install pytest'
+                sh './venv/bin/python -m pip install pytest'
+                
                 echo 'Run tests'
                 sh './venv/bin/python -m pytest'
             }
